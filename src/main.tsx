@@ -7,6 +7,8 @@ import Root from '@/routes/root.tsx';
 import ErrorPage from '@/routes/error-page';
 import Item from '@/routes/item';
 import Home from '@/routes/home';
+import queryClient from '@/react-query';
+import { QueryClientProvider } from 'react-query';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

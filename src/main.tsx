@@ -5,10 +5,12 @@ import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Root from '@/routes/root.tsx';
 import ErrorPage from '@/routes/error-page';
-import Item from '@/routes/item';
 import Home from '@/routes/home';
-import queryClient from '@/react-query';
-import { QueryClientProvider } from 'react-query';
+import { queryClient } from '@/utils/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import TvShow from '@/routes/tv-show';
+import Movie from '@/routes/movie/page';
+import movieLoader from '@/routes/movie/loader';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +22,13 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/:id',
-        element: <Item />,
+        path: '/tv-show/:id',
+        element: <TvShow />,
+      },
+      {
+        path: 'movie/:id',
+        element: <Movie />,
+        loader: movieLoader,
       },
     ],
   },

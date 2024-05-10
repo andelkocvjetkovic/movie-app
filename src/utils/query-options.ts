@@ -41,7 +41,7 @@ export const tvShowSearchOptions = (query: string) =>
     queryFn: () => axiosInstance.get<DBResponseList<TVShowListResult>>('search/tv', { params: { query } }).then(res => res.data),
   });
 
-export const tvShowDetailsOptions = (id: number) =>
+export const tvShowDetailsOptions = (id: string) =>
   queryOptions({
     queryKey: ['shows', 'details', id],
     queryFn: () => axiosInstance.get<TVShowDetailsResult>(`tv/${id}`).then(res => res.data),

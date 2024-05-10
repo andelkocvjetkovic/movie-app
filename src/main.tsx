@@ -8,7 +8,7 @@ import ErrorPage from '@/routes/error-page';
 import Home from '@/routes/home';
 import { queryClient } from '@/utils/react-query';
 import { QueryClientProvider } from '@tanstack/react-query';
-import TvShow from '@/routes/tv-show';
+import TvShow from '@/routes/tv-show/page';
 import Movie from '@/routes/movie/page';
 import movieLoader from '@/routes/movie/loader';
 

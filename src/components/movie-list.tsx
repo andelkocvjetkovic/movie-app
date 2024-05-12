@@ -1,5 +1,5 @@
+import Card from '@/components/card';
 import { MovieListResult } from '@/types/movie';
-import { Link } from 'react-router-dom';
 
 type MovieListProps = {
   list: MovieListResult[];
@@ -10,7 +10,7 @@ function MovieList({ list }: MovieListProps) {
     <ul>
       {list.map(movie => (
         <li key={movie.id}>
-          <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+          <Card title={movie.title} imgSrc={movie.poster_path} to={`/movie/${movie.id}`} />
         </li>
       ))}
     </ul>

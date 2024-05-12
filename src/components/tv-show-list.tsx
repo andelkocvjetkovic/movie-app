@@ -1,5 +1,5 @@
+import Card from '@/components/card';
 import { TVShowListResult } from '@/types/tv-show';
-import { Link } from 'react-router-dom';
 
 type TvShowListProps = {
   list: TVShowListResult[];
@@ -10,7 +10,7 @@ function TvShowList({ list }: TvShowListProps) {
     <ul>
       {list.map(tvShow => (
         <li key={tvShow.id}>
-          <Link to={`/tv-show/${tvShow.id}`}>{tvShow.name}</Link>
+          <Card title={tvShow.name} imgSrc={tvShow.poster_path} to={`/tv-show/${tvShow.id}`} />
         </li>
       ))}
     </ul>

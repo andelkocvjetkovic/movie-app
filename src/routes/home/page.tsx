@@ -1,5 +1,7 @@
+import Button from '@/components/button';
 import Either from '@/components/either';
 import MovieList from '@/components/movie-list';
+import SearchField from '@/components/search-field';
 import TvShowList from '@/components/tv-show-list';
 import homeLoader from '@/routes/home/loader';
 import { MovieListResult } from '@/types/movie';
@@ -20,31 +22,16 @@ function Home() {
     submit(searchParams);
   }, 1000);
 
-  const searching =
+  const isSearching =
     navigation.location &&
     (new URLSearchParams(navigation.location.search).has('q') || new URLSearchParams(navigation.location.search).has('tab'));
+
   return (
     <div>
-      <div className='flex justify-between'>
-        <div>
-          <input
-            id='q'
-            aria-label='Search contacts'
-            placeholder='Search'
-            type='search'
-            name='q'
-            value={query}
-            onChange={e => {
-              setQuery(e.target.value);
-              updateQuery(location.search, e.target.value);
-            }}
-          />
-          <div id='search-spinner' aria-hidden hidden={true} />
-          <div className='sr-only' aria-live='polite'></div>
-        </div>
+      <div className='flex flex-col gap-y-2'>
         <div className='flex gap-x-2'>
-          <button
-            name='movie'
+          <Button
+            variant='tab'
             style={{ backgroundColor: tab === 'movie' ? 'blue' : '' }}
             onClick={() => {
               const searchParams = new URLSearchParams(location.search);
@@ -53,8 +40,8 @@ function Home() {
             }}
           >
             Movie
-          </button>
-          <button
+          </Button>
+          <Button
             name='tv-show'
             style={{ backgroundColor: tab === 'tv-show' ? 'blue' : '' }}
             onClick={() => {
@@ -64,12 +51,23 @@ function Home() {
             }}
           >
             TV Show
-          </button>
+          </Button>
         </div>
+        <SearchField
+          className='block'
+          aria-label='Search contacts'
+          placeholder='Search'
+          type='search'
+          value={query}
+          onChange={e => {
+            setQuery(e.target.value);
+            updateQuery(location.search, e.target.value);
+          }}
+        />
       </div>
       <div
         style={{
-          opacity: searching ? 0.5 : 1,
+          opacity: isSearching ? 0.5 : 1,
         }}
       >
         <Either condition={tab === 'tv-show'} fallback={<MovieList list={list.results as MovieListResult[]} />}>

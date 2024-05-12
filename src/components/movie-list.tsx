@@ -1,4 +1,5 @@
 import Card from '@/components/card';
+import CardList from '@/components/card-list';
 import { MovieListResult } from '@/types/movie';
 
 type MovieListProps = {
@@ -7,13 +8,11 @@ type MovieListProps = {
 
 function MovieList({ list }: MovieListProps) {
   return (
-    <ul>
+    <CardList>
       {list.map(movie => (
-        <li key={movie.id}>
-          <Card title={movie.title} imgSrc={movie.poster_path} to={`/movie/${movie.id}`} />
-        </li>
+        <Card key={movie.id} title={movie.title} imgSrc={movie.poster_path} to={`/movie/${movie.id}`} />
       ))}
-    </ul>
+    </CardList>
   );
 }
 

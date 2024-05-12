@@ -1,4 +1,5 @@
 import Button from '@/components/button';
+import CardListNoResult from '@/components/card-list-no-result';
 import Either from '@/components/either';
 import MovieList from '@/components/movie-list';
 import SearchField from '@/components/search-field';
@@ -27,12 +28,12 @@ function Home() {
     (new URLSearchParams(navigation.location.search).has('q') || new URLSearchParams(navigation.location.search).has('tab'));
 
   return (
-    <div>
-      <div className='flex flex-col gap-y-2'>
+    <div className='container py-2 px-2'>
+      <div className='flex flex-col gap-y-4'>
         <div className='flex gap-x-2'>
           <Button
             variant='tab'
-            style={{ backgroundColor: tab === 'movie' ? 'blue' : '' }}
+            isActive={tab === 'movie'}
             onClick={() => {
               const searchParams = new URLSearchParams(location.search);
               searchParams.set('tab', 'movie');
@@ -43,7 +44,8 @@ function Home() {
           </Button>
           <Button
             name='tv-show'
-            style={{ backgroundColor: tab === 'tv-show' ? 'blue' : '' }}
+            variant='tab'
+            isActive={tab === 'tv-show'}
             onClick={() => {
               const searchParams = new URLSearchParams(location.search);
               searchParams.set('tab', 'tv-show');
@@ -66,12 +68,15 @@ function Home() {
         />
       </div>
       <div
+        className='py-6'
         style={{
           opacity: isSearching ? 0.5 : 1,
         }}
       >
-        <Either condition={tab === 'tv-show'} fallback={<MovieList list={list.results as MovieListResult[]} />}>
-          <TvShowList list={list.results as TVShowListResult[]} />
+        <Either condition={list.results.length > 0} fallback={<CardListNoResult />}>
+          <Either condition={tab === 'tv-show'} fallback={<MovieList list={list.results as MovieListResult[]} />}>
+            <TvShowList list={list.results as TVShowListResult[]} />
+          </Either>
         </Either>
       </div>
     </div>

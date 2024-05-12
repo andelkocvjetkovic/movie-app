@@ -1,3 +1,5 @@
+import { VideoResult } from '@/types/utils';
+
 export type MovieListResult = {
   adult: boolean;
   backdrop_path: string;
@@ -50,4 +52,5 @@ export type MovieDetailsResult = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  videos: VideoResult;
 };

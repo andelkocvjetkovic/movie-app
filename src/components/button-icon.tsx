@@ -5,7 +5,8 @@ import cn from '@/utils/cn';
 const buttonIconVariants = cva('', {
   variants: {
     variant: {
-      primary: '',
+      primary:
+        'w-8 h-8 bg-white text-black border border-black hover:bg-black hover:text-white hover:border-white inline-flex items-center justify-center transition-colors duration-200',
     },
   },
 });
@@ -13,7 +14,7 @@ const buttonIconVariants = cva('', {
 type ButtonIconProps = VariantProps<typeof buttonIconVariants> & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(({ className, variant, ...props }, ref) => (
-  <button ref={ref} className={cn('', variant, className)} {...props} />
+  <button ref={ref} className={cn(buttonIconVariants({ variant, className }))} {...props} />
 ));
 
 ButtonIcon.displayName = 'ButtonIcon';

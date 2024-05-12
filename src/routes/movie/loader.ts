@@ -7,7 +7,7 @@ async function movieLoader({ params, request }: LoaderFunctionArgs) {
     throw new Error('No movie ID provided');
   }
   const data = await axiosInstance
-    .get<MovieDetailsResult>(`movie/${params.id}?language=en-US`, {
+    .get<MovieDetailsResult>(`movie/${params.id}?append_to_response=videos&language=en-US`, {
       signal: request.signal,
     })
     .then(res => res.data);
